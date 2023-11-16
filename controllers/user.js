@@ -1,13 +1,16 @@
 const User = require('../models/User')
   module.exports = {
-    index: (req, res) => {
+    index: async (req, res) => {
+      try {
+        const users = await User.find() 
         if(users.length > 0){
-            res.json({
-                status: true,
-                data: users,
-                method: req.method,
-                url: req.url
-            })
+          res.status(200).json({
+            status: true,
+            data: users,
+            method: req.method,
+            url: req.url
+        })
+            
         }else{
             res.json({
                 status: false,
@@ -15,6 +18,12 @@ const User = require('../models/User')
 
             })
         }
+        
+      } catch (error) {
+        res.status(400).json({succes: false})
+        
+      }
+      
     },
     store: (req, res) => {
         users.push(req.body)
