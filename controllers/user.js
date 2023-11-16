@@ -1,8 +1,4 @@
-let users = [
-    {id: 1, nama:"Faiza", email: "faizacahyapradani001@gmail.com"}, // key dan value
-    {id: 2, nama:"zaza", email: "faizacahya001@gmail.com"},
-  ]
-
+const User = require('../models/User')
   module.exports = {
     index: (req, res) => {
         if(users.length > 0){
