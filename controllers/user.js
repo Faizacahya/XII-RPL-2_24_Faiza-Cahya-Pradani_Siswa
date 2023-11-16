@@ -1,5 +1,6 @@
 const User = require('../models/User')
   module.exports = {
+    // get all user
     index: async (req, res) => {
       try {
         const users = await User.find() 
@@ -25,6 +26,23 @@ const User = require('../models/User')
       }
       
     },
+    // get a user 
+    show: async (req, res) => {
+      try {
+        const user = await User.findById(req, params.id)
+        res.json({
+          status: true,
+          data: user,
+          method: req.method,
+          url: req.url,
+          message: "Data Berhasil Didapat"
+         }) 
+        
+      } catch (error) {
+        res.status(400).json({success: false})
+        
+      }
+    },
     store: async (req, res) => {
       try {
         const user = await User.create(req.body)
@@ -40,31 +58,28 @@ const User = require('../models/User')
         res.status(400).json({success: false})
         
       }
-    },  
-
+    },
       update: async (req, res) => {
         try {
           const user = await User.findByIdAndUpdate(req, params.id, req.body, {
             new: true,
             runValidators: true
+    
           })
           res.json({
             status: true,
             data: user,
             method: req.method,
             url: req.url,
-            message: "Data Berhasil Diubah"
+            message: "Data Berhasil Didapat"
            }) 
           
         } catch (error) {
           res.status(400).json({success: false})
           
         }
-
-        const id = req.params.id
+      }, 
         
-       
-      },
       delete: async (req, res) => {
         try {
           await User.findByIdAndDelete(req.params.id)

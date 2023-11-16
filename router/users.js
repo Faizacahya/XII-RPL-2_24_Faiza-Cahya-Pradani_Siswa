@@ -6,10 +6,12 @@
  
   router.get('/users', usercontroller.index)
   
-    router.post('/user', usercontroller.store)
+  router.get('/user/:id', usercontroller.show)
   
-    router.put('/user/:id', usercontroller.update)
+  router.post('/user', usercontroller.store)
   
-    router.delete('/user/:id', usercontroller.delete)
+  router.put('/user/:id', usercontroller.update)
+  
+  router.delete('/user/:id', usercontroller.delete)
 
-    module.exports = router
+  module.exports = router
