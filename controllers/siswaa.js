@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const User = require('../models/Siswaa')
   module.exports = {
     // get all user
     index: async (req, res) => {
@@ -29,7 +29,7 @@ const User = require('../models/User')
     // get a user 
     show: async (req, res) => {
       try {
-        const user = await User.findById(req, params.id)
+        const user = await User.findById(req.params.id)
         res.json({
           status: true,
           data: user,
@@ -39,7 +39,8 @@ const User = require('../models/User')
          }) 
         
       } catch (error) {
-        res.status(400).json({success: false})
+        console.error(error);
+        res.status(400).json({ success: false, error: error.message });
         
       }
     },
@@ -61,7 +62,7 @@ const User = require('../models/User')
     },
       update: async (req, res) => {
         try {
-          const user = await User.findByIdAndUpdate(req, params.id, req.body, {
+          const user = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
     
@@ -75,7 +76,8 @@ const User = require('../models/User')
            }) 
           
         } catch (error) {
-          res.status(400).json({success: false})
+          console.error(error);
+          res.status(400).json({ success: false, error: error.message });
           
         }
       }, 
